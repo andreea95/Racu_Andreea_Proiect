@@ -24,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Administrare produse</h1>
+            <h1>Administrare specificatii tehnice</h1>
         </div>
     </div>
     <ul class="nav nav-tabs">
@@ -44,7 +44,7 @@
         <div class="col-md-12">
             <div class="records_content">
                 <br/>
-                <h3>Specificatii</h3>
+                <h3>Specificatii tehnice</h3>
                 <table id="articles" class="table table-bordered table-striped">
 						<tr>
 							<th>ID.</th>
@@ -72,25 +72,40 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add New Category</h4>
+                <h4 class="modal-title" id="myModalLabel">Adaugare specificatii</h4>
             </div>
             <div class="modal-body">
                 <form id="record_form">
                     <input type="hidden" name="id" id="id" />
                     <div class="form-group">
-                        <label for="name">Nume</label>
+                        <label for="name">Memorie</label>
                         <input type="text" name="memory" id="memory" placeholder="Memorie" class="form-control"/>
                     </div>
-    
+                    
+                     <div class="form-group">
+                        <label for="abstract">HDD</label>
+                        <textarea name="HDD" id="HDD" placeholder="HDD" rows="5" class="form-control"></textarea>
+                    </div>
                     <div class="form-group">
-                        <label for="abstract">Descriere</label>
-                        <textarea name="description" id="HDD" placeholder="HDD" rows="5" class="form-control"></textarea>
+                        <label for="abstract">CPU</label>
+                        <textarea name="CPU" id="CPU" placeholder="CPU" rows="5" class="form-control"></textarea>
+                    </div>
+                    
+                    
+                    
+                    <div class="form-group">
+                        <label for="abstract">Greutate</label>
+                        <textarea name="weight" id="weight" placeholder="Greutate" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="abstract">Autonomie</label>
+                        <textarea name="autonomy" id="autonomy" placeholder="Autonomie" rows="5" class="form-control"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveRecord()">Save Record</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Renunta</button>
+                <button type="button" class="btn btn-primary" onclick="saveRecord()">Salvare date</button>
             </div>
         </div>
     </div>

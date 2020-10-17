@@ -23,7 +23,7 @@ function displayColumns(value) {
 			+ '<td class="HDD">'+value.HDD+'</td>'
 			+ '<td class="CPU">'+value.CPU+'</td>'
 			+ '<td class="weight">'+value.weight+'</td>'
-			+ '<td class="weight">'+value.autonomy+'</td>'
+			+ '<td class="autonomy">'+value.autonomy+'</td>'
 			+ '<td align="center">'
 			+	'<button onclick="viewRecord('+ value.id +')" class="btn btn-edit">Update</button>'
 			+ '</td>'
@@ -34,8 +34,11 @@ function displayColumns(value) {
 
 function addRecord() {
     $('#id').val('');
-    $('#name').val('');
-    $('#description').val('');
+    $('#memory').val('');
+    $('#HDD').val('');
+    $('#CPU').val('');
+    $('#weight').val('');
+    $('#autonomy').val('');
     
     $('#myModalLabel').html('Add New Category');
   //  $('#add_new_record_modal').modal('show');
@@ -50,6 +53,7 @@ function viewRecord(id) {
         $('#HDD').val(data.HDD);
         $('#CPU').val(data.CPU);
         $('#weight').val(data.weight);
+        $('#autonomy').val(data.autonomy);
 
         $('#id').val(id);
         $('#myModalLabel').html('Edit Category');
@@ -95,8 +99,12 @@ function updateRecord(formData) {
         },
         data: formData,
         success: function(data) {
-            $('#row_id_'+formData.id+'>td.name').html(formData.name);
-            $('#row_id_'+formData.id+'>td.description').html(formData.description);
+            $('#row_id_'+formData.id+'>td.memory').html(formData.memory);
+            $('#row_id_'+formData.id+'>td.HDD').html(formData.HDD);
+             $('#row_id_'+formData.id+'>td.CPU').html(formData.CPU);
+            $('#row_id_'+formData.id+'>td.weight').html(formData.weight);
+             $('#row_id_'+formData.id+'>td.autonomy').html(formData.autonomy);
+           
             $('#add_new_record_modal').modal('hide');
         } 
     });

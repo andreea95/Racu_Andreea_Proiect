@@ -19,7 +19,7 @@ function readRecords() {
 
 function displayColumns(value) {
     return 	'<td>'+value.id+'</td>'
-          //  + '<td class="spec_id">'+ (value.spec ? value.spec.name : value.spec_id) +'</td>'
+           + '<td class="spec_id">'+ (value.spec ? value.spec.id : value.spec_id) +'</td>'
             + '<td class="name">'+value.name+'</td>'
 			+ '<td class="company">'+value.company+'</td>'
 			+ '<td class="price">'+value.price+'</td>'
