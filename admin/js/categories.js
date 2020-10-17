@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 // READ records
 function readRecords() {
-    $.get("/categories/", {}, function (data, status) {
+    $.get("/specs/", {}, function (data, status) {
         data.forEach(function(value) {
             var row = '<tr id="row_id_'+ value.id +'">'
             			+ displayColumns(value)
@@ -19,8 +19,11 @@ function readRecords() {
 
 function displayColumns(value) {
     return 	'<td>'+value.id+'</td>'
-            + '<td class="name">'+value.name+'</td>'
-			+ '<td class="description">'+value.description+'</td>'
+            + '<td class="memory">'+value.memory+'</td>'
+			+ '<td class="HDD">'+value.HDD+'</td>'
+			+ '<td class="CPU">'+value.CPU+'</td>'
+			+ '<td class="weight">'+value.weight+'</td>'
+			+ '<td class="weight">'+value.autonomy+'</td>'
 			+ '<td align="center">'
 			+	'<button onclick="viewRecord('+ value.id +')" class="btn btn-edit">Update</button>'
 			+ '</td>'
@@ -39,12 +42,14 @@ function addRecord() {
 }
 
 function viewRecord(id) {
-    var url = "/categories/" + id;
+    var url = "/specs/" + id;
     
     $.get(url, {}, function (data, status) {
         //bind the values to the form fields
-        $('#name').val(data.name);
-        $('#description').val(data.description);
+        $('#memory').val(data.memory);
+        $('#HDD').val(data.HDD);
+        $('#CPU').val(data.CPU);
+        $('#weight').val(data.weight);
 
         $('#id').val(id);
         $('#myModalLabel').html('Edit Category');
@@ -64,7 +69,7 @@ function saveRecord() {
 
 function createRecord(formData) {
     $.ajax({
-        url: '/categories/',
+        url: '/specs/',
         type: 'POST',
         accepts: {
             json: 'application/json'
@@ -83,7 +88,7 @@ function createRecord(formData) {
 
 function updateRecord(formData) {
     $.ajax({
-        url: '/categories/'+formData.id,
+        url: '/specs/'+formData.id,
         type: 'PUT',
         accepts: {
             json: 'application/json'
@@ -99,7 +104,7 @@ function updateRecord(formData) {
 
 function deleteRecord(id) {
     $.ajax({
-        url: '/categories/'+id,
+        url: '/specs/'+id,
         type: 'DELETE',
         success: function(data) {
             $('#row_id_'+id).remove();

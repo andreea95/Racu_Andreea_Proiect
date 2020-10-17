@@ -19,9 +19,11 @@ function readRecords() {
 
 function displayColumns(value) {
     return 	'<td>'+value.id+'</td>'
-            + '<td class="category_id">'+ (value.category ? value.category.name : value.category_id) +'</td>'
+          //  + '<td class="spec_id">'+ (value.spec ? value.spec.name : value.spec_id) +'</td>'
             + '<td class="name">'+value.name+'</td>'
-			+ '<td class="description">'+value.description+'</td>'
+			+ '<td class="company">'+value.company+'</td>'
+			+ '<td class="price">'+value.price+'</td>'
+			+ '<td class="warranty">'+value.warranty+'</td>'
 			+ '<td align="center">'
 			+	'<button onclick="viewRecord('+ value.id +')" class="btn btn-edit">Update</button>'
 			+ '</td>'
@@ -32,9 +34,11 @@ function displayColumns(value) {
 
 function addRecord() {
     $('#id').val('');
-    $('#category_id').val('');
+    $('#spec_id').val('');
+    $('#company').val('');
     $('#name').val('');
-    $('#description').val('');
+    $('#price').val('');
+    $('#warranty').val('');
     
     $('#myModalLabel').html('Add New Product');
 }
@@ -44,10 +48,11 @@ function viewRecord(id) {
     
     $.get(url, {}, function (data, status) {
         //bind the values to the form fields
-        $('#category_id').val(data.category_id);
+        $('#spec_id').val(data.spec_id);
         $('#name').val(data.name);
-        $('#description').val(data.description);
+        $('#company').val(data.company);
         $('#price').val(data.price);
+        $('#warranty').val(data.warranty);
         $('#id').val(id);
         $('#myModalLabel').html('Edit Product');
         
@@ -95,9 +100,11 @@ function updateRecord(formData) {
         },
         data: formData,
         success: function(data) {
-            $('#row_id_'+formData.id+'>td.category_id').html(formData.category_id);
+            $('#row_id_'+formData.id+'>td.spec_id').html(formData.spec_id);
             $('#row_id_'+formData.id+'>td.name').html(formData.name);
-            $('#row_id_'+formData.id+'>td.description').html(formData.description);
+            $('#row_id_'+formData.id+'>td.company').html(formData.company);
+            $('#row_id_'+formData.id+'>td.price').html(formData.price);
+            $('#row_id_'+formData.id+'>td.warranty').html(formData.warranty);
             $('#add_new_record_modal').modal('hide');
         } 
     });

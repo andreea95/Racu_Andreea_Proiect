@@ -4,7 +4,13 @@
     border: none;
 }
 body {
+    color: red;
     font-family: 'robotoregular', Arial, Verdana, sans-serif;
+    background-image: url('/bdsa-product-catalog/public/css/dims.jpeg');
+    
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 h1,h2,h3,h4,h5,h6,strong,b {
     font-family: 'robotobold';
@@ -90,9 +96,11 @@ main > section > .sidebar.left ul li {
     border-width: 0 1px 0 1px;
     border-color: #ccc;
     border-style: solid;
+    color: red;
 }
 #content h2 {
     margin: 0;
+    color: red;
 }
 main > section > .sidebar.right {
     float: right;

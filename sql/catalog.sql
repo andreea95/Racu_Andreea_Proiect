@@ -18,10 +18,19 @@ USE `catalog`;
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
+
+--INSERT INTO specs  (memory,HDD, weight, CPU,autonomy) VALUES ('8GB RAM','SDD','1.3 kg', 'Intel 5 generatia 7','8h');
+--INSERT INTO products  (name,company,price,warranty, spec_id) VALUES ('Macbook air 2015','Apple','4200','da',1);
+
+CREATE TABLE IF NOT EXISTS `specs` (
   `id` smallint(5) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
+  `memory` varchar(100) DEFAULT NULL,
+  `HDD` varchar(100) DEFAULT NULL,
+  `weight` varchar(100) DEFAULT NULL,
+  `CPU` varchar(100) DEFAULT NULL,
+  `autonomy` varchar(100) DEFAULT NULL,
   `createdAt` timestamp,
   `updatedAt` timestamp,
   PRIMARY KEY (`id`),
@@ -48,15 +57,16 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `category_id` smallint(5) DEFAULT NULL,
-  `name` varchar(30) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `spec_id` smallint(5) DEFAULT NULL,
+  `company` varchar(100) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   `price` int(11) NOT NULL,
-  `image` varchar(100) DEFAULT NULL,
+  `warranty` varchar(100) DEFAULT NULL,
   `createdAt` timestamp,
   `updatedAt` timestamp,
   PRIMARY KEY (`id`),
-  KEY `id_produse` (`id`)
+  KEY `id_products` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 

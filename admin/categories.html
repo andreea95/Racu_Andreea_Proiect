@@ -24,12 +24,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Product Catalog Admin</h1>
+            <h1>Administrare produse</h1>
         </div>
     </div>
     <ul class="nav nav-tabs">
       <li role="presentation" ><a href="/admin/">Home</a></li>
-      <li role="presentation" class="active"><a href="categories.html">Categorii</a></li>
+      <li role="presentation" class="active"><a href="categories.html">Specificatii</a></li>
       <li role="presentation"><a href="products.html">Produse</a></li>
     </ul>
     <br/>
@@ -44,12 +44,15 @@
         <div class="col-md-12">
             <div class="records_content">
                 <br/>
-                <h3>Categorii</h3>
+                <h3>Specificatii</h3>
                 <table id="articles" class="table table-bordered table-striped">
 						<tr>
 							<th>ID.</th>
-							<th>Nume</th>
-							<th>Descriere</th>
+							<th>Memorie</th>
+							<th>HDD</th>
+							<th>CPU</th>
+							<th>Greutate</th>
+							<th>Autonomie</th>
 							<th>Update</th>
 							<th>Exclude</th>
 						</tr>
@@ -76,12 +79,12 @@
                     <input type="hidden" name="id" id="id" />
                     <div class="form-group">
                         <label for="name">Nume</label>
-                        <input type="text" name="name" id="name" placeholder="Descriere" class="form-control"/>
+                        <input type="text" name="memory" id="memory" placeholder="Memorie" class="form-control"/>
                     </div>
     
                     <div class="form-group">
                         <label for="abstract">Descriere</label>
-                        <textarea name="description" id="description" placeholder="Descriere" rows="5" class="form-control"></textarea>
+                        <textarea name="description" id="HDD" placeholder="HDD" rows="5" class="form-control"></textarea>
                     </div>
                 </form>
             </div>
@@ -95,6 +98,12 @@
 <!-- // Modal -->
 
 
-
 </body>
 </html>
+
+<style type="text/css">
+  body{
+ background-color: 	#e4cee4;
+ background-image: url("/bdsa-product-catalog/public/css/dims.jpeg");
+  }
+</style>

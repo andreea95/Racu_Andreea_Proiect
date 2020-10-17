@@ -3,9 +3,9 @@ var Sequelize = require("sequelize")
 
 //connect to mysql database
 //baza de date, username, password
-var sequelize = new Sequelize('catalog', 'root', 'pass', {
+var sequelize = new Sequelize('catalog', 'username', 'password', {
     dialect:'mysql',
-    host:'db'
+    host:'127.0.0.1'
 })
 
 sequelize.authenticate().then(function(){
@@ -15,17 +15,27 @@ sequelize.authenticate().then(function(){
 })
 
 //define a new Model
-var Categories = sequelize.define('categories', {
+var Specs = sequelize.define('specs', {
     name: Sequelize.STRING,
-    description: Sequelize.STRING
+    description: Sequelize.STRING,
+    memory: Sequelize.STRING,
+    HDD: Sequelize.STRING,
+    weight: Sequelize.STRING,
+    CPU: Sequelize.STRING,
+    autonomy: Sequelize.STRING
+    
+   
 })
 
 var Products = sequelize.define('products', {
     name: Sequelize.STRING,
-    category_id: Sequelize.INTEGER,
+    spec_id: Sequelize.INTEGER,
+    company: Sequelize.STRING,
     description: Sequelize.STRING,
     price: Sequelize.INTEGER,
-    image: Sequelize.STRING
+    warranty: Sequelize.STRING,
+   
+
 })
 
 var Reviews = sequelize.define('reviews', {
@@ -35,7 +45,7 @@ var Reviews = sequelize.define('reviews', {
     score: Sequelize.INTEGER
 })
 
-Products.belongsTo(Categories, {foreignKey: 'category_id', targetKey: 'id'})
+Products.belongsTo(Specs, {foreignKey: 'spec_id', targetKey: 'id'})
 Products.hasMany(Reviews, {foreignKey: 'product_id'});
 
 var app = express()
@@ -59,41 +69,41 @@ app.get('/createdata', (req, res) => {
     //TODO add some test data here
 })
 
-async function getCategories(request, response) {
+async function getSpecs(request, response) {
     try {
-        let categories = await Categories.findAll();
-        response.status(200).json(categories)
+        let specs = await Specs.findAll();
+        response.status(200).json(specs)
     } catch(err) {
         response.status(500).send('something bad happened')
     }
 }
 
-// get a list of categories
-app.get('/categories', getCategories)
+// get a list of specs
+app.get('/specs', getSpecs)
 
-// get one category by id
-app.get('/categories/:id', function(request, response) {
-    Categories.findOne({where: {id:request.params.id}}).then(function(category) {
-        if(category) {
-            response.status(200).send(category)
+// get one spec by id
+app.get('/specs/:id', function(request, response) {
+    Specs.findOne({where: {id:request.params.id}}).then(function(spec) {
+        if(spec) {
+            response.status(200).send(spec)
         } else {
             response.status(404).send()
         }
     })
 })
 
-//create a new category
-app.post('/categories', function(request, response) {
-    Categories.create(request.body).then(function(category) {
-        response.status(201).send(category)
+//create a new spec
+app.post('/specs', function(request, response) {
+    Specs.create(request.body).then(function(spec) {
+        response.status(201).send(spec)
     })
 })
 
-app.put('/categories/:id', function(request, response) {
-    Categories.findByPk(request.params.id).then(function(category) {
-        if(category) {
-            category.update(request.body).then(function(category){
-                response.status(201).send(category)
+app.put('/specs/:id', function(request, response) {
+    Specs.findByPk(request.params.id).then(function(spec) {
+        if(spec) {
+            spec.update(request.body).then(function(spec){
+                response.status(201).send(spec)
             }).catch(function(error) {
                 response.status(200).send(error)
             })
@@ -103,10 +113,10 @@ app.put('/categories/:id', function(request, response) {
     })
 })
 
-app.delete('/categories/:id', function(request, response) {
-    Categories.findByPk(request.params.id).then(function(category) {
-        if(category) {
-            category.destroy().then(function(){
+app.delete('/specs/:id', function(request, response) {
+    Specs.findByPk(request.params.id).then(function(spec) {
+        if(spec) {
+            spec.destroy().then(function(){
                 response.status(204).send()
             })
         } else {
@@ -119,8 +129,8 @@ app.get('/products', function(request, response) {
     Products.findAll(
         {
             include: [{
-                model: Categories,
-                where: { id: Sequelize.col('products.category_id') }
+                model: Specs,
+                where: { id: Sequelize.col('products.spec_id') }
             }, {
                 model: Reviews,
                 where: { id: Sequelize.col('products.id')},
@@ -138,8 +148,8 @@ app.get('/products', function(request, response) {
 app.get('/products/:id', function(request, response) {
     Products.findByPk(request.params.id, {
             include: [{
-                model: Categories,
-                where: { id: Sequelize.col('products.category_id') }
+                model: Specs,
+                where: { id: Sequelize.col('products.spec_id') }
             }, {
                 model: Reviews,
                 where: { id: Sequelize.col('products.id')},
@@ -184,13 +194,13 @@ app.delete('/products/:id', function(request, response) {
     })
 })
 
-app.get('/categories/:id/products', function(request, response) {
+app.get('/specs/:id/products', function(request, response) {
     Products.findAll({
-            where:{category_id: request.params.id},
+            where:{spec_id: request.params.id},
             
             include: [{
-                model: Categories,
-                where: { id: Sequelize.col('products.category_id') }
+                model: Specs,
+                where: { id: Sequelize.col('products.spec_id') }
             }, {
                 model: Reviews,
                 where: { id: Sequelize.col('products.id')},
